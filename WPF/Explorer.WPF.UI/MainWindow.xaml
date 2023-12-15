@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Explorer.WPF.UI"
         mc:Ignorable="d"
+        
         WindowState ="Maximized"
         WindowStartupLocation="CenterScreen">
     <Grid>
@@ -15,18 +15,7 @@
 
         <TextBox Text="{Binding FilePath}"/>
 
-        <ListBox  Grid.Row="1"
-            ItemsSource="{Binding DirectoriesAndFiles}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="{Binding Name}"/>
-                    </Grid>
-                    
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        
-
+        <ListBox Grid.Row="1"
+            ItemsSource="{Binding DirectoriesAndFiles}"/>
     </Grid>
 </Window>
