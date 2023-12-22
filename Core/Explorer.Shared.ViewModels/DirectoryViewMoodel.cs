@@ -1,12 +1,15 @@
 ﻿namespace Explorer.Shared.ViewModels
 {
-    public class DirectoryViewMoodel : FileEntityViewModel
+    public sealed class DirectoryViewMoodel : FileEntityViewModel
     {
-        public string DirectoryName { get; }
-
-        public DirectoryViewMoodel(string directoryName)
+        public DirectoryViewMoodel(string directoryName) : base(directoryName) 
         {
-            DirectoryName = directoryName;
+            FullName = directoryName;
+        }
+
+        public DirectoryViewMoodel(DirectoryInfo directoryName) : base(directoryName.Name)
+        {
+            FullName = directoryName.FullName;
         }
     }
 }

@@ -1,7 +1,15 @@
-﻿namespace Explorer.Shared.ViewModels
+﻿
+namespace Explorer.Shared.ViewModels
 {
-    public class FileViewModel : FileEntityViewModel
-    { 
+    public sealed class FileViewModel : FileEntityViewModel
+    {
+        private FileInfo fileInfo;
 
+        public FileViewModel(string name) : base(name) { }
+
+        public FileViewModel(FileInfo fileInfo) : base(fileInfo.Name)
+        {
+            FullName = fileInfo.FullName;
+        }
     }
 }
