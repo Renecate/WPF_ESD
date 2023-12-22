@@ -11,6 +11,8 @@ namespace Explorer.Shared.ViewModels
 
         public string FilePath { get; set; }
 
+        public string Name { get; set; }
+
         public ObservableCollection<FileEntityViewModel> DirectoriesAndFiles { get; set; } = new ObservableCollection<FileEntityViewModel>();
 
         public FileEntityViewModel SelectedFileEntity { get; set; }
@@ -26,6 +28,8 @@ namespace Explorer.Shared.ViewModels
 
         public MainViewModel()
         {
+            Name = "My PC";
+            
             OpenCommand = new DelegateCommand(Open);
 
             foreach (var logicalDrive in Directory.GetLogicalDrives())
@@ -42,6 +46,8 @@ namespace Explorer.Shared.ViewModels
             if (parameter is DirectoryViewMoodel directoryViewMoodel)
             {
                 FilePath = directoryViewMoodel.FullName;
+
+                Name = directoryViewMoodel.Name;
 
                 DirectoriesAndFiles.Clear();
 
