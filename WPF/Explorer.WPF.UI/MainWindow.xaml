@@ -11,7 +11,10 @@
         
         WindowStyle="None"
         
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        
+        x:Name="Window">
+    
 
     <Window.Resources>
         <Style TargetType="{x:Type Window}"
@@ -55,8 +58,9 @@
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="{Binding Name}"/>
-                                                    <Button Command="{Binding CloseCommand}">
-                                                        X
+                                                    <Button Content="X"
+                                                            Command="{Binding DataContext.CloseCommand, ElementName=Window}"
+                                                            CommandParameter="{Binding }">
                                                     </Button>
                                                 </StackPanel>
                                             </DataTemplate>
@@ -106,7 +110,8 @@
                                             Command="{Binding CurrentDirectoryTabItem.MoveBackCommand}"/>
                                     <Button Grid.Column="1" 
                                             Content="-&gt;"
-                                            Margin="2"/>
+                                            Margin="2"
+                                            Command="{Binding CurrentDirectoryTabItem.MoveForwardCommand}"/>
                                     <Button Grid.Column="2" 
                                             Content="0"
                                             Margin="2"/>

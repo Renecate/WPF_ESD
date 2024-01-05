@@ -1,10 +1,15 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace Explorer.Shared.ViewModels
 {
     public class DirectoryTabItemViewModel : BaseViewModel
     {
+        #region Private Fields
+
+        private IDirectoryHistory _history; 
+
+        #endregion
+
         #region Public Properties
 
         public string FilePath { get; set; }
@@ -18,9 +23,11 @@ namespace Explorer.Shared.ViewModels
         #endregion
 
         #region Commands
-        public ICommand OpenCommand { get; }
+        public DelegateCommand OpenCommand { get; }
 
-        public ICommand CloseCommand { get; }
+        public DelegateCommand MoveBackCommand { get; }
+
+        public DelegateCommand MoveForwardCommand { get; }
 
         #endregion
 
@@ -34,16 +41,32 @@ namespace Explorer.Shared.ViewModels
 
         public DirectoryTabItemViewModel()
         {
-            Name = "My PC";
+            _history = new DirectoryHistory("My PC", "My PC");
 
             OpenCommand = new DelegateCommand(Open);
-            CloseCommand = new DelegateCommand(OnClose);
+            MoveBackCommand = new DelegateCommand(OnMoveBack, OnCanMoveBack);
+            MoveForwardCommand = new DelegateCommand(OnMoveForward, OnCanMoveForvard);
 
-            foreach (var logicalDrive in Directory.GetLogicalDrives())
+            Name = _history.Current.DirectoryPathName;
+            FilePath = _history.Current.DirectoryPath;
+
+            if (Name == "My PC")
             {
-                DirectoriesAndFiles.Add(new DirectoryViewMoodel(logicalDrive));
+                foreach (var logicalDrive in Directory.GetLogicalDrives())
+                {
+                    DirectoriesAndFiles.Add(new DirectoryViewMoodel(logicalDrive));
+                }
             }
+            else
+            {
+                OpenDirectory();
+            }
+
+            _history.HistoryChanged += History_HistoryChanged;
         }
+
+
+
         #endregion
 
         #region Commands Methods
@@ -53,28 +76,65 @@ namespace Explorer.Shared.ViewModels
             if (parameter is DirectoryViewMoodel directoryViewMoodel)
             {
                 FilePath = directoryViewMoodel.FullName;
-
                 Name = directoryViewMoodel.Name;
 
-                DirectoriesAndFiles.Clear();
+                _history.Add(FilePath, Name); 
 
-                var directoryInfo = new DirectoryInfo(FilePath);
-
-                foreach (var directory in directoryInfo.GetDirectories())
-                {
-                    DirectoriesAndFiles.Add(new DirectoryViewMoodel(directory));
-                }
-
-                foreach (var fileInfo in directoryInfo.GetFiles())
-                {
-                    DirectoriesAndFiles.Add(new FileViewModel(fileInfo));
-                }
+                OpenDirectory();
             }
         }
 
-        private void OnClose(object obj)
+        private bool OnCanMoveForvard(object obj) => _history.CanMoveForward;
+
+        private void OnMoveForward(object obj)
         {
-            Closed?.Invoke(this, new EventArgs());
+            _history.MoveForward();
+
+            var current = _history.Current;
+
+            FilePath = current.DirectoryPath;
+            Name = current.DirectoryPathName;
+
+            OpenDirectory();
+        }
+
+        private bool OnCanMoveBack(object obj) => _history.CanMoveBack;
+
+        private void OnMoveBack(object obj)
+        {
+            _history.MoveBack();
+
+            var current = _history.Current;
+
+            FilePath = current.DirectoryPath;
+            Name = current.DirectoryPathName;
+
+            OpenDirectory();
+        }
+        #endregion
+
+        #region Private Methods
+        private void OpenDirectory()
+        {
+            DirectoriesAndFiles.Clear();
+
+            var directoryInfo = new DirectoryInfo(FilePath);
+
+            foreach (var directory in directoryInfo.GetDirectories())
+            {
+                DirectoriesAndFiles.Add(new DirectoryViewMoodel(directory));
+            }
+
+            foreach (var fileInfo in directoryInfo.GetFiles())
+            {
+                DirectoriesAndFiles.Add(new FileViewModel(fileInfo));
+            }
+        }
+
+        private void History_HistoryChanged(object? sender, EventArgs e)
+        {
+            MoveBackCommand?.RaiseCanExecuteChanged();
+            MoveForwardCommand?.RaiseCanExecuteChanged();
         }
         #endregion
     }

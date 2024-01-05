@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace Explorer.Shared.ViewModels
@@ -18,7 +19,7 @@ namespace Explorer.Shared.ViewModels
 
         public DelegateCommand AddTabItemCommmand { get; }
 
-
+        public DelegateCommand CloseCommand { get; }
         #endregion
 
         #region Constructor
@@ -30,6 +31,8 @@ namespace Explorer.Shared.ViewModels
             AddTabItemViewModel();
 
             CurrentDirectoryTabItem = DirectoryTabItems.FirstOrDefault();
+
+            CloseCommand = new DelegateCommand(OnClose);
         }
 
 
@@ -45,22 +48,12 @@ namespace Explorer.Shared.ViewModels
         {
             var vm = new DirectoryTabItemViewModel();
 
-            vm.Closed += Vm_Closed;
-
             DirectoryTabItems.Add(vm);
         }
 
-        private void Vm_Closed(object? sender, EventArgs e)
-        {
-            if (sender is DirectoryTabItemViewModel directoryTabItemViewModel) 
-            {
-                CloseTab(directoryTabItemViewModel);
-            }
-        }
 
         private void CloseTab(DirectoryTabItemViewModel directoryTabItemViewModel)
         {
-            directoryTabItemViewModel.Closed -= Vm_Closed;
 
             DirectoryTabItems.Remove(directoryTabItemViewModel);
 
@@ -80,7 +73,14 @@ namespace Explorer.Shared.ViewModels
         public void ApplicationClosing()
         {
             
-        } 
+        }
+        private void OnClose(object obj)
+        {
+            if (obj is DirectoryTabItemViewModel directoryTabItemViewModel)
+            {
+                CloseTab(directoryTabItemViewModel);
+            }
+        }
         #endregion
     }
 }
