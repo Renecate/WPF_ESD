@@ -69,6 +69,8 @@ namespace Explorer.Shared.ViewModels
         private void OnAddTabItem(object obj)
         {
             AddTabItemViewModel();
+
+            CurrentDirectoryTabItem = DirectoryTabItems.Last();
         }
 
         #endregion
