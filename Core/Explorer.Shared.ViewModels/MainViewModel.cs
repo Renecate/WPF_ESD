@@ -74,5 +74,13 @@ namespace Explorer.Shared.ViewModels
         }
 
         #endregion
+
+
+        #region Public Methods
+        public void ApplicationClosing()
+        {
+            
+        } 
+        #endregion
     }
 }
