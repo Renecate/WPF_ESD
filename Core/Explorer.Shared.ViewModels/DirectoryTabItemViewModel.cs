@@ -11,7 +11,7 @@ namespace Explorer.Shared.ViewModels
 
         public string Name { get; set; }
 
-        public ObservableCollection<FileEntityViewModel> DirectoriesAndFiles { get; set; } = new ObservableCollection<FileEntityViewModel>();
+        public ObservableCollection<FileEntityViewModel> DirectoriesAndFiles { get; set; } = [];
 
         public FileEntityViewModel SelectedFileEntity { get; set; }
 

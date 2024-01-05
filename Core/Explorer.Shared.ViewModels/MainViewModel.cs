@@ -8,7 +8,7 @@ namespace Explorer.Shared.ViewModels
         #region Public Properties
 
         public ObservableCollection<DirectoryTabItemViewModel> DirectoryTabItems { get; set; } =
-            new ObservableCollection<DirectoryTabItemViewModel>();
+            [];
 
         public DirectoryTabItemViewModel CurrentDirectoryTabItem { get; set; }
 
