@@ -16,17 +16,23 @@ namespace Explorer.Shared.ViewModels
 
         #region Commands
 
+        public DelegateCommand AddTabItemCommmand { get; }
+
+
         #endregion
 
         #region Constructor
 
         public MainViewModel()
         {
-            AddTabItemViewModel();
+            AddTabItemCommmand = new DelegateCommand(OnAddTabItem);
+
             AddTabItemViewModel();
 
             CurrentDirectoryTabItem = DirectoryTabItems.FirstOrDefault();
         }
+
+
         #endregion
 
         #region Commands Methods
@@ -59,6 +65,10 @@ namespace Explorer.Shared.ViewModels
             DirectoryTabItems.Remove(directoryTabItemViewModel);
 
             CurrentDirectoryTabItem = DirectoryTabItems.FirstOrDefault();
+        }
+        private void OnAddTabItem(object obj)
+        {
+            AddTabItemViewModel();
         }
 
         #endregion
