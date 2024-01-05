@@ -20,6 +20,14 @@ namespace Explorer.Shared.ViewModels
         #region Commands
         public ICommand OpenCommand { get; }
 
+        public ICommand CloseCommand { get; }
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler Closed;
+
         #endregion
 
         #region Constructor
@@ -29,6 +37,7 @@ namespace Explorer.Shared.ViewModels
             Name = "My PC";
 
             OpenCommand = new DelegateCommand(Open);
+            CloseCommand = new DelegateCommand(OnClose);
 
             foreach (var logicalDrive in Directory.GetLogicalDrives())
             {
@@ -63,6 +72,10 @@ namespace Explorer.Shared.ViewModels
             }
         }
 
+        private void OnClose(object obj)
+        {
+            Closed?.Invoke(this, new EventArgs());
+        }
         #endregion
     }
 }

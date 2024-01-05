@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Explorer.Shared.ViewModels
 {
@@ -11,7 +12,6 @@ namespace Explorer.Shared.ViewModels
 
         public DirectoryTabItemViewModel CurrentDirectoryTabItem { get; set; }
 
-
         #endregion
 
         #region Commands
@@ -22,11 +22,44 @@ namespace Explorer.Shared.ViewModels
 
         public MainViewModel()
         {
-            DirectoryTabItems.Add(new DirectoryTabItemViewModel());
+            AddTabItemViewModel();
+            AddTabItemViewModel();
+
+            CurrentDirectoryTabItem = DirectoryTabItems.FirstOrDefault();
         }
         #endregion
 
         #region Commands Methods
+
+        #endregion
+
+        #region Private Methods
+
+        private void AddTabItemViewModel()
+        {
+            var vm = new DirectoryTabItemViewModel();
+
+            vm.Closed += Vm_Closed;
+
+            DirectoryTabItems.Add(vm);
+        }
+
+        private void Vm_Closed(object? sender, EventArgs e)
+        {
+            if (sender is DirectoryTabItemViewModel directoryTabItemViewModel) 
+            {
+                CloseTab(directoryTabItemViewModel);
+            }
+        }
+
+        private void CloseTab(DirectoryTabItemViewModel directoryTabItemViewModel)
+        {
+            directoryTabItemViewModel.Closed -= Vm_Closed;
+
+            DirectoryTabItems.Remove(directoryTabItemViewModel);
+
+            CurrentDirectoryTabItem = DirectoryTabItems.FirstOrDefault();
+        }
 
         #endregion
     }
