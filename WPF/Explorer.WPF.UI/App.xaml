@@ -4,6 +4,41 @@
              xmlns:local="clr-namespace:Explorer.WPF.UI">
     
     <Application.Resources>
-         
+        <DrawingImage x:Key="FolderIconImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V1024 H1024 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFFA000" Geometry="F1 M1024,1024z M0,0z M853.333333,256L469.333333,256 384,170.666667 170.666667,170.666667C123.733334,170.666667,85.333334,209.066667,85.333333,256L85.333333,426.666667 938.666667,426.666667 938.666667,341.333333C938.666667,294.4,900.266667,256,853.333333,256z" />
+                    <GeometryDrawing Brush="#FFFFCA28" Geometry="F1 M1024,1024z M0,0z M853.333333,256L170.666667,256C123.733334,256,85.333334,294.4,85.333333,341.333333L85.333333,768C85.333333,814.933333,123.733333,853.333333,170.666667,853.333333L853.333333,853.333333C900.266666,853.333333,938.666666,814.933333,938.666667,768L938.666667,341.333333C938.666667,294.4,900.266667,256,853.333333,256z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="FileIconImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V64 H64 V0 H0 Z">
+                    <DrawingGroup Opacity="1">
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="#FFF9EBB2" Geometry="F1 M64,64z M0,0z M2,35L2,58C2,60.209 3.791,62 6,62 8.209,62 10,60.209 10,58L10,33 4,33C2.896,33,2,33.896,2,35z" />
+                            <GeometryDrawing Brush="#FFF9EBB2" Geometry="F1 M64,64z M0,0z M60,2L14,2C12.896,2,12,2.896,12,4L12,58C12,59.539,11.416,60.938,10.463,62L58,62C60.209,62,62,60.209,62,58L62,4C62,2.896,61.104,2,60,2z" />
+                        </DrawingGroup>
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="#FF394240" Geometry="F1 M64,64z M0,0z M60,0L14,0C11.789,0,10,1.789,10,4L10,31 4,31C1.789,31,0,32.789,0,35L0,58C0,61.313,2.687,64,6,64L58,64C61.313,64,64,61.313,64,58L64,4C64,1.789,62.211,0,60,0z M10,58C10,60.209 8.209,62 6,62 3.791,62 2,60.209 2,58L2,35C2,33.896,2.896,33,4,33L10,33 10,58z M62,58C62,60.209,60.209,62,58,62L10.463,62C11.416,60.938,12,59.539,12,58L12,4C12,2.896,12.896,2,14,2L60,2C61.104,2,62,2.896,62,4L62,58z" />
+                            <GeometryDrawing Brush="#FF394240" Geometry="F1 M64,64z M0,0z M53,25L21,25C20.447,25 20,25.447 20,26 20,26.553 20.447,27 21,27L53,27C53.553,27 54,26.553 54,26 54,25.447 53.553,25 53,25z" />
+                            <GeometryDrawing Brush="#FF394240" Geometry="F1 M64,64z M0,0z M53,19L21,19C20.447,19 20,19.447 20,20 20,20.553 20.447,21 21,21L53,21C53.553,21 54,20.553 54,20 54,19.447 53.553,19 53,19z" />
+                            <GeometryDrawing Brush="#FF394240" Geometry="F1 M64,64z M0,0z M53,37L21,37C20.447,37 20,37.447 20,38 20,38.553 20.447,39 21,39L53,39C53.553,39 54,38.553 54,38 54,37.447 53.553,37 53,37z" />
+                            <GeometryDrawing Brush="#FF394240" Geometry="F1 M64,64z M0,0z M53,43L21,43C20.447,43 20,43.447 20,44 20,44.553 20.447,45 21,45L53,45C53.553,45 54,44.553 54,44 54,43.447 53.553,43 53,43z" />
+                            <GeometryDrawing Brush="#FF394240" Geometry="F1 M64,64z M0,0z M53,49L21,49C20.447,49 20,49.447 20,50 20,50.553 20.447,51 21,51L53,51C53.553,51 54,50.553 54,50 54,49.447 53.553,49 53,49z" />
+                            <GeometryDrawing Brush="#FF394240" Geometry="F1 M64,64z M0,0z M53,31L21,31C20.447,31 20,31.447 20,32 20,32.553 20.447,33 21,33L53,33C53.553,33 54,32.553 54,32 54,31.447 53.553,31 53,31z" />
+                            <GeometryDrawing Brush="#FF394240" Geometry="F1 M64,64z M0,0z M21,15L36,15C36.553,15 37,14.553 37,14 37,13.447 36.553,13 36,13L21,13C20.447,13 20,13.447 20,14 20,14.553 20.447,15 21,15z" />
+                        </DrawingGroup>
+                        <GeometryDrawing Geometry="F1 M64,64z M0,0z M2,35L2,58C2,60.209 3.791,62 6,62 8.209,62 10,60.209 10,58L10,33 4,33C2.896,33,2,33.896,2,35z">
+                            <GeometryDrawing.Brush>
+                                <SolidColorBrush Color="#FF231F20" Opacity="0.15" />
+                            </GeometryDrawing.Brush>
+                        </GeometryDrawing>
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
     </Application.Resources>
 </Application>

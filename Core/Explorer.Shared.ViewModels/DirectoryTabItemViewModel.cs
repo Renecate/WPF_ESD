@@ -63,7 +63,7 @@ namespace Explorer.Shared.ViewModels
 
         private void Open(object parameter)
         {
-            if (parameter is DirectoryViewMoodel directoryViewMoodel)
+            if (parameter is DirectoryViewModel directoryViewMoodel)
             {
                 FilePath = directoryViewMoodel.FullName;
                 Name = directoryViewMoodel.Name;
@@ -112,7 +112,7 @@ namespace Explorer.Shared.ViewModels
             {
                 foreach (var logicalDrive in Directory.GetLogicalDrives())
                 {
-                    DirectoriesAndFiles.Add(new DirectoryViewMoodel(logicalDrive));
+                    DirectoriesAndFiles.Add(new DirectoryViewModel(logicalDrive));
                 }
                 return;
             }
@@ -121,7 +121,7 @@ namespace Explorer.Shared.ViewModels
 
             foreach (var directory in directoryInfo.GetDirectories())
             {
-                DirectoriesAndFiles.Add(new DirectoryViewMoodel(directory));
+                DirectoriesAndFiles.Add(new DirectoryViewModel(directory));
             }
 
             foreach (var fileInfo in directoryInfo.GetFiles())
