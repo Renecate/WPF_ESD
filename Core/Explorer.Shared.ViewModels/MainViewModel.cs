@@ -56,8 +56,6 @@ namespace Explorer.Shared.ViewModels
         {
 
             DirectoryTabItems.Remove(directoryTabItemViewModel);
-
-            CurrentDirectoryTabItem = DirectoryTabItems.FirstOrDefault();
         }
         private void OnAddTabItem(object obj)
         {

@@ -50,17 +50,7 @@ namespace Explorer.Shared.ViewModels
             Name = _history.Current.DirectoryPathName;
             FilePath = _history.Current.DirectoryPath;
 
-            if (Name == "My PC")
-            {
-                foreach (var logicalDrive in Directory.GetLogicalDrives())
-                {
-                    DirectoriesAndFiles.Add(new DirectoryViewMoodel(logicalDrive));
-                }
-            }
-            else
-            {
-                OpenDirectory();
-            }
+            OpenDirectory();
 
             _history.HistoryChanged += History_HistoryChanged;
         }
@@ -117,6 +107,15 @@ namespace Explorer.Shared.ViewModels
         private void OpenDirectory()
         {
             DirectoriesAndFiles.Clear();
+
+            if (Name == "My PC")
+            {
+                foreach (var logicalDrive in Directory.GetLogicalDrives())
+                {
+                    DirectoriesAndFiles.Add(new DirectoryViewMoodel(logicalDrive));
+                }
+                return;
+            }
 
             var directoryInfo = new DirectoryInfo(FilePath);
 

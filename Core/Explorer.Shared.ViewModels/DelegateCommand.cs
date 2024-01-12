@@ -8,17 +8,13 @@ namespace Explorer.Shared.ViewModels
         private readonly Predicate<object> _canExecute;
 
 
-        public DelegateCommand(Action<object> execute, Predicate<object> _canExecute = null)
+        public DelegateCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
             _execute = execute;
+            _canExecute = canExecute;
         }
 
-        public Predicate<object> Get_canExecute()
-        {
-            return _canExecute;
-        }
-
-        public bool CanExecute(object parameter) => _canExecute == null || _canExecute.Invoke(parameter);
+        public bool CanExecute(object parameter) => _canExecute == null ? true : _canExecute.Invoke(parameter);
 
         public void Execute(object parameter)
         {
